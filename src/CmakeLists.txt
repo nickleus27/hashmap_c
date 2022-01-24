@@ -1,0 +1,9 @@
+
+add_executable(hashmap
+    main.c
+    hash_pair_vector.c
+    hash_table.c
+    int_string.c
+    hash_pair.c
+    int_double.c
+)
