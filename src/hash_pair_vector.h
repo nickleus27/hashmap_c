@@ -51,5 +51,6 @@ char* hashPair_v_get_str_val(hash_pair_vector *, int);
 
 //put function to put new value to key-value pair
 bool hashPair_v_put_dbl_val(hash_pair_vector*, int, double);
+bool hashPair_v_put_str_val(hash_pair_vector*, int, char*);
 
 #endif /* HASH_PAIR_VECTOR_H */

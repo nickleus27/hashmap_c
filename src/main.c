@@ -53,7 +53,8 @@ main(int argc, char **argv)
     print_dbl_val_ht(dbl);
 //done with dbl
 
-//printing str again
+//change a str value
+    put_str_value_ht(t, 2, "HELLO WORLD!!!");
     print_str_val_ht(t);
 
     //free both tables

@@ -234,3 +234,13 @@ put_dbl_value_ht(hashtable* table, int key, double newValue)
     else
         return false;
 }
+
+bool
+put_str_value_ht(hashtable* table, int key, char* newValue)
+{
+    hash_pair_vector* temp_v = table->ptr[hash(table, key)];
+    if( hashPair_v_put_str_val(temp_v, key, newValue) )
+        return true;
+    else
+        return false;
+}

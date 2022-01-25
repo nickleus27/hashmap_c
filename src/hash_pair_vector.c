@@ -145,7 +145,8 @@ hashPair_v_get_key(hash_pair_vector * vector, int index)
     }
 }
 
-bool hashPair_v_put_dbl_val(hash_pair_vector* vector, int key, double dbl)
+bool
+hashPair_v_put_dbl_val(hash_pair_vector* vector, int key, double dbl)
 {
     for(int i = 0; i < vector->size; i++)
     {
@@ -159,3 +160,20 @@ bool hashPair_v_put_dbl_val(hash_pair_vector* vector, int key, double dbl)
     }
     return false;
 }
+
+bool
+hashPair_v_put_str_val(hash_pair_vector* vector, int key, char* str)
+{
+    for(int i = 0; i < vector->size; i++)
+    {
+        if(key == HashPair_get_key(vector->ptr[i]))
+        {
+            union value_t newValue;
+            newValue.strValue = str;
+            HashPair_put_value(vector->ptr[i], newValue);
+            return true;
+        }
+    }
+    return false;
+}
+

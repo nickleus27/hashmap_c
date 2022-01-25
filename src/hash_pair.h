@@ -34,7 +34,7 @@ struct HashPairVtbl {
     int (*get_key)(HashPair const * const me);
     HashPair* (*clone)(HashPair const * const me);
     void* (*get_value)(HashPair const * const me);
-    void (*put_value)(HashPair const * const me, union value_t newValue);
+    void (*put_value)(HashPair* me, union value_t newValue);
     //GET VALUE??
 };
 
@@ -57,7 +57,7 @@ static inline HashPair* HashPair_clone(HashPair const * const me) {
 static inline void* HashPair_get_value(HashPair const * const me) {
     return (*me->vptr->get_value)(me);
 }
-static inline void HashPair_put_value(HashPair const * const me, union value_t newValue)
+static inline void HashPair_put_value(HashPair* me, union value_t newValue)
 {
     (*me->vptr->put_value)(me, newValue);
 }

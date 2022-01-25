@@ -7,6 +7,7 @@
 static int IntStringPair_get_key_(HashPair const * const me);
 static HashPair* IntStringPair_clone_(HashPair const * const me);
 static void* IntStringPair_get_value_(HashPair const * const me);
+static void IntStringPair_put_value_(HashPair* me, union value_t newValue);
 
 /* constructor */
 void IntStringPair_ctor(IntStringPair * const me, int thisKey, char* thisValue)
@@ -14,7 +15,8 @@ void IntStringPair_ctor(IntStringPair * const me, int thisKey, char* thisValue)
     static struct HashPairVtbl const vtbl = { /* vtbl of the IntStringPair class */
         &IntStringPair_get_key_,
         &IntStringPair_clone_,
-        &IntStringPair_get_value_
+        &IntStringPair_get_value_,
+        &IntStringPair_put_value_
     };
     HashPair_ctor(&me->super, thisKey); /* call the superclass' ctor */
     me->super.vptr = &vtbl; /* override the vptr */
@@ -28,7 +30,8 @@ IntStringPair* new_IntStringPair(int thiskey, const char* thisValue)
     static struct HashPairVtbl const vtbl = { /* vtbl of the IntStringPair class */
         &IntStringPair_get_key_,
         &IntStringPair_clone_,
-        &IntStringPair_get_value_
+        &IntStringPair_get_value_,
+        &IntStringPair_put_value_
     };
     IntStringPair* obj = (IntStringPair*)malloc(sizeof(IntStringPair));
     if(!obj)
@@ -68,6 +71,19 @@ static void* IntStringPair_get_value_(HashPair const * const me)
     char* copy = (char *) malloc(sizeof(char) * strlen( (char*)me->value +1 ) );
     strcpy(copy, (const char*)me->value );
     return copy;
+}
+
+static void IntStringPair_put_value_(HashPair* me, union value_t newValue)
+{
+    void* temp = NULL;
+    int thiStrLen = strlen((char*)me->value), newStrLen = strlen(newValue.strValue);
+    if ( thiStrLen < newStrLen)
+    {
+        temp = (char*)realloc(me->value, sizeof(char) * newStrLen);
+        if ( temp )
+            me->value = temp;
+        strcpy(me->value, newValue.strValue);
+    }
 }
 
 /* wrapper function for privacy

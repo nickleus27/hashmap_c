@@ -27,4 +27,5 @@ char* get_str_value_ht(hashtable*, int);
 double get_dbl_value_ht(hashtable*, int);
 //put new value for key-value pair
 bool put_dbl_value_ht(hashtable*, int, double);
+bool put_str_value_ht(hashtable*, int, char*);
 #endif /* hash_table_h */

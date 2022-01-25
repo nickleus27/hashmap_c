@@ -7,7 +7,7 @@
 static int IntDoublePair_get_key_(HashPair const * const me);
 static HashPair* IntDoublePair_clone_(HashPair const * const me);
 static void* IntDoublePair_get_value_(HashPair const * const me);
-static void IntDoublePair_put_value_(HashPair const * const me, union value_t newValue);
+static void IntDoublePair_put_value_(HashPair* me, union value_t newValue);
 
 /* constructor */
 /*
@@ -72,7 +72,7 @@ static void* IntDoublePair_get_value_(HashPair const * const me)
     return me->value;
 }
 
-static void IntDoublePair_put_value_(HashPair const * const me, union value_t newValue)
+static void IntDoublePair_put_value_(HashPair* me, union value_t newValue)
 {
     *(double*)me->value = newValue.dblValue;
 }

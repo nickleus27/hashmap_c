@@ -12,7 +12,7 @@
 static int get_key_(HashPair const * const me);
 static HashPair* HashPair_clone_(HashPair const * const me);
 static void* get_value_(HashPair const * const me);
-static void put_value_(HashPair const * const me, union value_t newValue);
+static void put_value_(HashPair* me, union value_t newValue);
 
 /* constructor */
 void HashPair_ctor(HashPair * const me, int thisKey) {
@@ -60,7 +60,7 @@ static HashPair* HashPair_clone_(HashPair const * const me) {
     return 0U; /* to avoid compiler warnings */
 }
 
-static void put_value_(HashPair const * const me, union value_t newValue)
+static void put_value_(HashPair* me, union value_t newValue)
 {
     assert(0);/* purely-virtual function should never be called */
 }
