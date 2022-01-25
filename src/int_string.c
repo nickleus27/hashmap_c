@@ -1,5 +1,5 @@
 #include "int_string.h" /* IntStringPair class interface */
-#include <string.h> /* for printf() */
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 /* IntStringPair's prototypes of its virtual functions */
@@ -79,11 +79,15 @@ static void IntStringPair_put_value_(HashPair* me, union value_t newValue)
     int thiStrLen = strlen((char*)me->value), newStrLen = strlen(newValue.strValue);
     if ( thiStrLen < newStrLen)
     {
-        temp = (char*)realloc(me->value, sizeof(char) * newStrLen);
-        if ( temp )
+        temp = (char*)realloc(me->value, sizeof(char) * newStrLen +1);
+        if ( !temp ){
+            printf("Memory for new string value was not able to be allocated");
+            return;
+        }else{
             me->value = temp;
-        strcpy(me->value, newValue.strValue);
+        }
     }
+    strcpy(me->value, newValue.strValue);
 }
 
 /* wrapper function for privacy
